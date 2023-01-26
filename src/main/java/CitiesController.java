@@ -1,7 +1,10 @@
+package controllers;
+
 import attraction.Cities;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+import repositories.CitiesRepository;
 
 import java.util.List;
 
@@ -17,6 +20,7 @@ public class CitiesController {
 
     @GetMapping("/cities/all")
     public List<Cities> allCities() {
+        System.out.println("HERE");
         return citiesRepository.findAll();
     }
 }
