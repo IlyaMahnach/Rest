@@ -9,7 +9,7 @@ public class Cities {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private boolean metro;
+    private String metro;
     private String country;
     @Column(name = "name")
     private String name;
@@ -23,7 +23,7 @@ public class Cities {
     public Cities() {
     }
 
-    public Cities(String name, int population, boolean metro, String country ) {
+    public Cities(String name, int population, String metro, String country ) {
         this.name = name;
         this.population = population;
         this.metro = metro;
@@ -60,11 +60,11 @@ public class Cities {
         this.population = population;
     }
 
-    public void setMetro(boolean metro){
+    public void setMetro(String metro){
         this.metro = metro;
     }
 
-    public boolean getMetro(){
+    public String getMetro(){
         return metro;
     }
 

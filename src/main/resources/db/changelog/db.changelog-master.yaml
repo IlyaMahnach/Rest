@@ -5,7 +5,7 @@ databaseChangeLog:
       author: postgres
       changes:
         - createTable:
-            tableName: users
+            tableName: cities
             columns:
               - column:
                   name: id
@@ -15,22 +15,163 @@ databaseChangeLog:
                     primaryKey: true
                     nullable: false
               - column:
-                  name: username
+                  name: name
                   type: varchar(50)
-                  constraints:
-                    unique: true
-                    nullable: false
               - column:
-                  name: password
+                  name: population
                   type: varchar(512)
+              - column:
+                  name: metro
+                  type: varchar(50)
+              - column:
+                  name: country
+                  type: varchar(50)
+
+  - changeSet:
+      id: 2
+      author: postgres
+      changes:
+        - insert:
+            tableName: cities
+            columns:
+              - column:
+                  name: name
+                  value: "Томск"
+              - column:
+                  name: population
+                  value: "2134134"
+              - column:
+                  name: metro
+                  value: "Нет"
+              - column:
+                  name: country
+                  value: "Россия"
+        - insert:
+            tableName: cities
+            columns:
+              - column:
+                  name: name
+                  value: "Новосибирск"
+              - column:
+                  name: population
+                  value: "23414314"
+              - column:
+                  name: metro
+                  value: "Есть"
+              - column:
+                  name: country
+                  value: "Россия"
+
+  - changeSet:
+      id: 3
+      author: postgres
+      changes:
+        - createTable:
+            tableName: sight
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
                   constraints:
+                    primaryKey: true
                     nullable: false
               - column:
-                  name: first_name
+                  name: name
                   type: varchar(50)
               - column:
-                  name: last_name
+                  name: year
                   type: varchar(50)
               - column:
-                  name: email
+                  name: description
+                  type: varchar(512)
+              - column:
+                  name: type
                   type: varchar(50)
+              - column:
+                  name: city_id
+                  type: varchar(50)
+
+  - changeSet:
+      id: 4
+      author: postgres
+      changes:
+        - insert:
+            tableName: sight
+            columns:
+              - column:
+                  name: name
+                  value: "Памятник Антону Чехову"
+              - column:
+                  name: year
+                  value: "2004"
+              - column:
+                  name: description
+                  value: "Необычная скульптура писателя"
+              - column:
+                  name: type
+                  value: "Памятник"
+              - column:
+                  name: city_id
+                  value: "1"
+        - insert:
+            tableName: sight
+            columns:
+              - column:
+                  name: name
+                  value: "Памятник рублю"
+              - column:
+                  name: year
+                  value: "2008"
+              - column:
+                  name: description
+                  value: "Монумент из дерева, посвященный национальной валюте"
+              - column:
+                  name: type
+                  value: "Памятник"
+              - column:
+                  name: city_id
+                  value: "1"
+        - insert:
+            tableName: sight
+            columns:
+              - column:
+                  name: name
+                  value: "Новосибирский зоопарк"
+              - column:
+                  name: year
+                  value: "1947"
+              - column:
+                  name: description
+                  value: "Один из крупнейших зоопарков в стране"
+              - column:
+                  name: type
+                  value: "Парк"
+              - column:
+                  name: city_id
+                  value: "2"
+        - insert:
+            tableName: sight
+            columns:
+              - column:
+                  name: name
+                  value: "Театр «Красный факел»"
+              - column:
+                  name: year
+                  value: "1932"
+              - column:
+                  name: description
+                  value: "Считается одним из ведущих театров Новосибирска"
+              - column:
+                  name: type
+                  value: "Здание"
+              - column:
+                  name: city_id
+                  value: "2"
+      rollback:
+        - delete:
+            tableName: cities
+            where: name in ('Томск', 'Новосибирск')
+        - delete:
+            tableName: sight
+            where: name in ('Новосибирский зоопарк', 'Театр «Красный факел»')

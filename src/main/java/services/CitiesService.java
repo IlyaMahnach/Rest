@@ -30,7 +30,7 @@ public class CitiesService {
         citiesDao.update(cities);
     }
 
-    public List<Cities> findAllCities() {
+    public List<Cities> findAll() {
         return citiesDao.findAll();
     }
 

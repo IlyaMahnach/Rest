@@ -1,10 +1,10 @@
-package controllers;
-
 import attraction.Cities;
+import attraction.Sight;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
-import repositories.CitiesRepository;
 
 import java.util.List;
 
@@ -20,7 +20,11 @@ public class CitiesController {
 
     @GetMapping("/cities/all")
     public List<Cities> allCities() {
-        System.out.println("HERE");
         return citiesRepository.findAll();
+    }
+    @DeleteMapping("/cities/1")
+    public void deleteCities(@PathVariable(name="1") Cities cities) {
+    citiesRepository.delete(cities);
+
     }
 }

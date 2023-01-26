@@ -24,6 +24,7 @@ public class CitiesDao {
         session.close();
     }
 
+
     public void update(Cities cities) {
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         Transaction tx1 = session.beginTransaction();
